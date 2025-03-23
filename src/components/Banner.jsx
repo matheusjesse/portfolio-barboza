@@ -34,7 +34,7 @@ export default function Banner() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center bg-gradient-to-br from-indigo-900 to-green-900 min-h-screen overflow-auto">
+    <div className="max-w-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 to-green-900 min-h-screen overflow-auto">
       <div className="container max-w-5xl mx-auto px-4">
         {/* Título */}
         <div className="w-full md:w-4/5">
@@ -84,7 +84,7 @@ export default function Banner() {
           <Swiper
             modules={[Autoplay, Navigation, Pagination]}
             spaceBetween={10}
-            slidesPerView={3}
+            slidesPerView={1}
             navigation
             pagination={{ clickable: true }}
             autoplay={{
@@ -92,6 +92,10 @@ export default function Banner() {
               disableOnInteraction: false,
             }}
             breakpoints={{
+              320: {
+                slidesPerView: 1, // Mostra 1 slide por vez
+                spaceBetween: 10, // Espaçamento menor entre os slides
+              },
               640: {
                 slidesPerView: 2,
                 spaceBetween: 20,
