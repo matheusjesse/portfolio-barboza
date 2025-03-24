@@ -64,4 +64,14 @@ export const stacks = [
     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg',
     description: 'Code Editor',
   },
+  {
+    name: 'NestJS',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg',
+    description: 'Node.js Framework',
+  },
+  {
+    name: 'Jest',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jest/jest-plain.svg',
+    description: 'Testing Framework',
+  },
 ];
