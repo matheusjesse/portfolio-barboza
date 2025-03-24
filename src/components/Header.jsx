@@ -62,24 +62,28 @@ export default function Header() {
                 Contato
               </a>
               <div className="relative">
-                <button
+              <button
                   className="flex flex-row text-gray-900 bg-gray-200 items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark:bg-transparent dark:focus:text-white dark:hover:text-white dark:focus:bg-gray-600 dark:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 >
-                  <span>Mais</span>
-                  <svg
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    className={`inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform ${
-                      isDropdownOpen ? 'rotate-180' : 'rotate-0'
-                    } md:-mt-1`}
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+                  <div className="flex items-center gap-1 pt-1">
+                    <FaLinkedin className="text-gray-800 dark:text-gray-200" />
+                    <FaGithub className="text-gray-800 dark:text-gray-200" />
+                    
+                    <svg
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      className={`inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform ${
+                        isDropdownOpen ? 'rotate-180' : 'rotate-0'
+                      } md:-mt-1`}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
                 </button>
                 {isDropdownOpen && (
                   <div className=" pt-6  absolute right-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right">
