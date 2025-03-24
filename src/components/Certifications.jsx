@@ -29,11 +29,11 @@ export default function Certifications() {
   }, []);
 
   return (
-    <section className="py-16 bg-gray-100 mb-24 flex items-center justify-center h-194">
+    <section className="py-16 bg-gray-100 mb-24 flex items-center justify-center h-244">
       <div className="container mx-auto px-4">
         {/* Título */}
         <h2
-          className="opacity-0 translate-y-10 transition-all duration-1000 ease-out text-3xl font-bold text-center mb-8"
+          className="opacity-0 translate-y-10 transition-all duration-1000 ease-out text-3xl font-bold text-center mb-8 "
           data-scroll
         >
           Certificações e Cursos

@@ -35,7 +35,7 @@ export default function AboutMe() {
       <div className="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
         <div className="space-y-64 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
           {/* Imagem */}
-          <div className="md:5/12 lg:w-5/12 opacity-0 translate-y-10 transition-all duration-1000 ease-out" data-scroll>
+          <div className="flex items-center justify-center md:5/12 lg:w-5/12 opacity-0 translate-y-10 transition-all duration-1000 ease-out" data-scroll>
             <Image
               src={Profile}
               alt="Matheus Barboza"

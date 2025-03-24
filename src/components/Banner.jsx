@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { FaChevronRight } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import { stacks } from '@/utils/stacks';
 
 export default function Banner() {
@@ -82,10 +82,9 @@ export default function Banner() {
             Minhas Stacks e Ferramentas
           </h3>
           <Swiper
-            modules={[Autoplay, Navigation, Pagination]}
+            modules={[Autoplay]}
             spaceBetween={10}
             slidesPerView={1}
-            navigation
             pagination={{ clickable: true }}
             autoplay={{
               delay: 3000,
