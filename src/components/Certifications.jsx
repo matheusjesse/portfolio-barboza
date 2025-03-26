@@ -29,11 +29,11 @@ export default function Certifications() {
   }, []);
 
   return (
-    <section className="py-16 bg-gray-100 mb-24 flex items-center justify-center h-244">
+    <section className="py-16 bg-gray-100 flex items-center justify-center h-244">
       <div className="container mx-auto px-4">
         {/* Título */}
         <h2
-          className="opacity-0 translate-y-10 transition-all duration-1000 ease-out text-3xl font-bold text-center mb-8 "
+          className=" text-gray-800 opacity-0 translate-y-10 transition-all duration-1000 ease-out text-3xl font-bold text-center mb-8 "
           data-scroll
         >
           Certificações e Cursos
@@ -46,14 +46,14 @@ export default function Certifications() {
             className="opacity-0 translate-y-10 transition-all duration-1000 ease-out bg-white p-6 rounded-lg shadow-lg"
             data-scroll
           >
-            <h3 className="text-xl font-semibold">Análise e Desenvolvimento de Sistemas</h3>
+            <h3 className="text-xl text-gray-800 font-semibold">Análise e Desenvolvimento de Sistemas</h3>
             <p className="text-gray-600">Graduação - concluído</p>
             <p className="text-gray-600 mt-2">Estácio</p>
           </div>
 
           {/* Card 2 */}
           <div
-            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out bg-white p-6 rounded-lg shadow-lg"
+            className="opacity-0 text-gray-800 translate-y-10 transition-all duration-1000 ease-out bg-white p-6 rounded-lg shadow-lg"
             data-scroll
           >
             <h3 className="text-xl font-semibold">Inteligência Artificial</h3>
@@ -63,7 +63,7 @@ export default function Certifications() {
 
           {/* Card 3 */}
           <div
-            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out bg-white p-6 rounded-lg shadow-lg"
+            className="opacity-0 text-gray-800 translate-y-10 transition-all duration-1000 ease-out bg-white p-6 rounded-lg shadow-lg"
             data-scroll
           >
             <h3 className="text-xl font-semibold">Google UX Design</h3>
@@ -76,7 +76,7 @@ export default function Certifications() {
             className="opacity-0 translate-y-10 transition-all duration-1000 ease-out bg-white p-6 rounded-lg shadow-lg"
             data-scroll
           >
-            <h3 className="text-xl font-semibold">Desenvolvimento Full-Stack</h3>
+            <h3 className="text-xl font-semibold text-gray-800">Desenvolvimento Full-Stack</h3>
             <p className="text-gray-600">Curso - concluído</p>
             <p className="text-gray-600 mt-2">Trybe</p>
           </div>
