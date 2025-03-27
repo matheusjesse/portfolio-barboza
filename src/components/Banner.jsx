@@ -39,7 +39,7 @@ export default function Banner() {
         {/* Título */}
         <div className="w-full md:w-4/5">
           <h1
-            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out text-white text-4xl md:text-6xl font-bold"
+            className="pt-18 opacity-0 translate-y-10 transition-all duration-1000 ease-out text-white text-4xl md:text-6xl font-bold"
             data-scroll
           >
             Desenvolvedor Full-Stack Web e Mobile <br />
@@ -74,7 +74,7 @@ export default function Banner() {
         </div>
 
         {/* Carrossel de Stacks */}
-        <div className="text-white relative">
+        <div className="text-white relative pb-18">
           <h3
             className="opacity-0 translate-y-10 transition-all duration-1000 ease-out uppercase font-semibold"
             data-scroll
