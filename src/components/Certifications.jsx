@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { FaGraduationCap, FaRobot, FaLaptopCode, FaPalette } from 'react-icons/fa';
 
 export default function Certifications() {
   useEffect(() => {
@@ -13,72 +14,129 @@ export default function Certifications() {
           }
         });
       },
-      {
-        threshold: 0.1, // Aciona a animação quando 10% do elemento estiver visível
+      { 
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px' // Adiciona um pequeno offset
       }
     );
 
-    // Observar todos os elementos com o atributo data-scroll
     const elements = document.querySelectorAll('[data-scroll]');
     elements.forEach((el) => observer.observe(el));
 
-    // Limpar o observer ao desmontar o componente
     return () => {
       elements.forEach((el) => observer.unobserve(el));
     };
   }, []);
 
   return (
-    <section className="py-16 bg-gray-100 flex items-center justify-center h-244">
-      <div className="container mx-auto px-4">
+    <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50 flex items-center justify-center min-h-[900px]">
+      <div className="container mx-auto px-4 max-w-6xl">
         {/* Título */}
         <h2
-          className=" text-gray-800 opacity-0 translate-y-10 transition-all duration-1000 ease-out text-3xl font-bold text-center mb-8 "
+          className="text-4xl md:text-5xl font-bold text-center mb-34 opacity-0 translate-y-10 transition-all duration-1000 ease-out"
           data-scroll
         >
-          Certificações e Cursos
+          <span className="text-gray-800">
+            Certificações e Cursos
+          </span>
         </h2>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-24">
+        {/* Cards - IMPORTANTE: Adicionei data-scroll aqui */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-24">
           {/* Card 1 */}
           <div
-            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out bg-white p-6 rounded-lg shadow-lg"
-            data-scroll
+            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out bg-white p-8 rounded-xl shadow-lg  hover:shadow-xl"
+            data-scroll // Adicionei este atributo
           >
-            <h3 className="text-xl text-gray-800 font-semibold">Análise e Desenvolvimento de Sistemas</h3>
-            <p className="text-gray-600">Graduação - concluído</p>
-            <p className="text-gray-600 mt-2">Estácio</p>
+            <div className="flex items-start gap-4">
+              <div className="bg-blue-100 p-3 rounded-full">
+                <FaGraduationCap className="text-blue-600 text-2xl" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-700">Análise e Desenvolvimento de Sistemas</h3>
+                <div className="flex items-center mt-2">
+                  <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                    Graduação
+                  </span>
+                  <span className="ml-2 text-sm text-gray-600">Concluído</span>
+                </div>
+                <p className="mt-3 text-gray-600 flex items-center">
+                  <span className="font-medium">Estácio</span>
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Card 2 */}
           <div
-            className="opacity-0 text-gray-800 translate-y-10 transition-all duration-1000 ease-out bg-white p-6 rounded-lg shadow-lg"
-            data-scroll
+            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-100 bg-white p-8 rounded-xl shadow-lg  hover:shadow-xl"
+            data-scroll // Adicionei este atributo
           >
-            <h3 className="text-xl font-semibold">Inteligência Artificial</h3>
-            <p className="text-gray-600">Pós Graduação - cursando</p>
-            <p className="text-gray-600 mt-2">Anhembi Morumbi</p>
+            <div className="flex items-start gap-4">
+              <div className="bg-purple-100 p-3 rounded-full">
+                <FaRobot className="text-purple-600 text-2xl" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-700">Inteligência Artificial</h3>
+                <div className="flex items-center mt-2">
+                  <span className="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                    Pós Graduação
+                  </span>
+                  <span className="ml-2 text-sm text-gray-600">Cursando</span>
+                </div>
+                <p className="mt-3 text-gray-600 flex items-center">
+                  <span className="font-medium">Anhembi Morumbi</span>
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Card 3 */}
           <div
-            className="opacity-0 text-gray-800 translate-y-10 transition-all duration-1000 ease-out bg-white p-6 rounded-lg shadow-lg"
-            data-scroll
+            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-200 bg-white p-8 rounded-xl shadow-lg  hover:shadow-xl"
+            data-scroll // Adicionei este atributo
           >
-            <h3 className="text-xl font-semibold">Google UX Design</h3>
-            <p className="text-gray-600">Curso - concluído</p>
-            <p className="text-gray-600 mt-2">Coursera</p>
+            <div className="flex items-start gap-4">
+              <div className="bg-teal-100 p-3 rounded-full">
+                <FaPalette className="text-teal-600 text-2xl" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-700">Google UX Design</h3>
+                <div className="flex items-center mt-2">
+                  <span className="bg-teal-100 text-teal-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                    Curso
+                  </span>
+                  <span className="ml-2 text-sm text-gray-600">Concluído</span>
+                </div>
+                <p className="mt-3 text-gray-600 flex items-center">
+                  <span className="font-medium">Coursera</span>
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Card 4 */}
           <div
-            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out bg-white p-6 rounded-lg shadow-lg"
-            data-scroll
+            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-300 bg-white p-8 rounded-xl shadow-lg  hover:shadow-xl"
+            data-scroll // Adicionei este atributo
           >
-            <h3 className="text-xl font-semibold text-gray-800">Desenvolvimento Full-Stack</h3>
-            <p className="text-gray-600">Curso - concluído</p>
-            <p className="text-gray-600 mt-2">Trybe</p>
+            <div className="flex items-start gap-4">
+              <div className="bg-orange-100 p-3 rounded-full">
+                <FaLaptopCode className="text-orange-600 text-2xl" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-700">Desenvolvimento Full-Stack</h3>
+                <div className="flex items-center mt-2">
+                  <span className="bg-orange-100 text-orange-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                    Curso
+                  </span>
+                  <span className="ml-2 text-sm text-gray-600">Concluído</span>
+                </div>
+                <p className="mt-3 text-gray-600 flex items-center">
+                  <span className="font-medium">Trybe</span>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
