@@ -83,10 +83,10 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="max-w-screen-lg mx-auto p-3 w-full">
-      <div className="grid grid-cols-1 md:grid-cols-12 border border-gray-300 rounded-lg overflow-hidden w-full">
+    <div className="max-w-screen-lg mx-auto p-3 w-full ">
+      <div className="grid grid-cols-1 md:grid-cols-12 border border-gray-300 rounded-lg overflow-hidden w-full ">
         {/* Seção de contato - ocupa 4 colunas */}
-        <div className="md:col-span-4 p-10 text-white backdrop-blur-md bg-white/10 border-r border-white/20">
+        <div className="md:col-span-4 p-10 text-white backdrop-blur-md bg-white/10 border-r border-white/20 ">
           <h3 className="text-3xl sm:text-3xl leading-normal font-extrabold tracking-tight text-gray-700">
           Vamos começar <span className="text-teal-500">Me chame no WhatsApp</span>
           </h3>
@@ -131,7 +131,7 @@ export default function ContactForm() {
             <h4 className="text-2xl mb-2 sm:text-2xl leading-normal font-extrabold tracking-tight text-gray-700">
               Caso prefira, você pode enviar um e-mail
             </h4>
-            <div className="mb-4 opacity-0 translate-y-10 transition-all duration-1000 ease-out" data-scroll>
+            <div className="mb-4 " data-scroll>
               <label className="block text-gray-700">Nome</label>
               <input
                 type="text"
@@ -143,7 +143,7 @@ export default function ContactForm() {
               />
             </div>
   
-            <div className="mb-4 opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-100" data-scroll>
+            <div className="mb-4 " data-scroll>
               <label className="block text-gray-700">E-mail</label>
               <input
                 type="email"
@@ -155,7 +155,7 @@ export default function ContactForm() {
               />
             </div>
   
-            <div className="mb-4 opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-200" data-scroll>
+            <div className="mb-4 " data-scroll>
               <label className="block text-gray-700">Título</label>
               <input
                 type="text"
@@ -167,7 +167,7 @@ export default function ContactForm() {
               />
             </div>
   
-            <div className="mb-4 opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-300" data-scroll>
+            <div className="mb-4" data-scroll>
               <label className="block text-gray-700">Mensagem</label>
               <textarea
                 name="message"
@@ -179,7 +179,7 @@ export default function ContactForm() {
               ></textarea>
             </div>
   
-            <div className="opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-400 flex justify-end" data-scroll>
+            <div className="flex justify-end" data-scroll>
               <button
                 type="submit"
                 disabled={!isFormValid}
