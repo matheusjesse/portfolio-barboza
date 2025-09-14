@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import { FaLinkedin, FaGithub, FaDownload, FaUser, FaBriefcase, FaEnvelope, FaHome, FaChevronDown } from 'react-icons/fa'; 
+import { FaLinkedin, FaGithub, FaUser, FaBriefcase, FaEnvelope, FaHome, FaChevronDown } from 'react-icons/fa'; 
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -189,7 +189,7 @@ export default function Header() {
                 <span>Contato</span>
               </button>
 
-              <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+              <div className="flex items-center justify-center pt-4 border-t border-gray-200">
                 <div className="flex space-x-4">
                   <a 
                     href="https://github.com/matheusjesse" 
@@ -208,11 +208,6 @@ export default function Header() {
                     <FaLinkedin className="text-xl" />
                   </a>
                 </div>
-                
-                <button className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300">
-                  <FaDownload className="text-sm" />
-                  <span>CV</span>
-                </button>
               </div>
             </div>
           </div>
