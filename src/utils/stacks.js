@@ -56,7 +56,7 @@ export const stacks = [
   },
   {
     name: 'Postman',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg',
     description: 'API Testing',
   },
   {
@@ -73,5 +73,40 @@ export const stacks = [
     name: 'Jest',
     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jest/jest-plain.svg',
     description: 'Testing Framework',
+  },
+  {
+    name: 'Flutter',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg',
+    description: 'Mobile Framework',
+  },
+  {
+    name: 'Dart',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg',
+    description: 'Flutter Language',
+  },
+  {
+    name: 'PostgreSQL',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+    description: 'Advanced Database',
+  },
+  {
+    name: 'SQLite',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg',
+    description: 'Lightweight Database',
+  },
+  {
+    name: 'Express',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
+    description: 'Node.js Framework',
+  },
+  {
+    name: 'Sequelize',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sequelize/sequelize-original.svg',
+    description: 'ORM for Node.js',
+  },
+  {
+    name: 'GitHub Actions',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
+    description: 'CI/CD Platform',
   },
 ];
