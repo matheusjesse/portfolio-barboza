@@ -5,6 +5,7 @@ import ContactForm from "@/components/ContactForm";
 import AboutMe from "@/components/AboutMe";
 import Certifications from "@/components/Certifications";
 import FloatingButton from "@/components/FloatingButton";
+import Projects from "@/components/Projects";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <main className="w-full row-start-2">
         <Banner />
         <AboutMe />
+        <Projects />
         <Certifications />
         <section id="contact" className="py-16 bg-white min-h-screen flex items-center justify-center">
           

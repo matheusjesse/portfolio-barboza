@@ -1,13 +1,14 @@
-'use client';
+﻿'use client';
 
-import { useEffect } from 'react';
-import { FaChevronRight } from 'react-icons/fa';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.css';
-import { Autoplay } from 'swiper/modules';
-import { stacks } from '@/utils/stacks';
+import { useEffect, useRef } from 'react';
+import { FaEye, FaDownload } from 'react-icons/fa';
+import Image from 'next/image';
+import Profile from '../utils/images/profile.jpg';
+import { stacks } from '../utils/stacks';
 
 export default function Banner() {
+  const scrollRef = useRef(null);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -18,115 +19,185 @@ export default function Banner() {
           }
         });
       },
-      {
-        threshold: 0.1, // Aciona a animação quando 10% do elemento estiver visível
-      }
+      { threshold: 0.1 }
     );
 
-    // Observar todos os elementos com o atributo data-scroll
     const elements = document.querySelectorAll('[data-scroll]');
     elements.forEach((el) => observer.observe(el));
 
-    // Limpar o observer ao desmontar o componente
-    return () => {
-      elements.forEach((el) => observer.unobserve(el));
-    };
+    return () => elements.forEach((el) => observer.unobserve(el));
   }, []);
 
+  const scrollToProjects = () => {
+    const section = document.getElementById('projetos');
+    if (section) section.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <div className="max-w-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 to-green-900 min-h-screen overflow-auto">
-      <div className="container max-w-5xl mx-auto px-4">
-        {/* Título */}
-        <div className="w-full md:w-4/5">
-          <h1
-            className="pt-18 opacity-0 translate-y-10 transition-all duration-1000 ease-out text-white text-4xl md:text-6xl font-bold"
-            data-scroll
-          >
-            Desenvolvedor Full-Stack Web e Mobile <br />
-            <span className="text-blue-400">Matheus Barboza</span>
-          </h1>
-        </div>
+    <div className="relative min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 overflow-hidden">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-5rem)]">
+          
+          <div className="text-center lg:text-left space-y-8">
+            <div 
+              className="opacity-0 translate-y-10 transition-all duration-1000 ease-out inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm font-medium"
+              data-scroll
+            >
+              <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+              Disponível
+            </div>
 
-        {/* Descrição */}
-        <div className="w-full md:w-5/6 my-6 md:my-10 ml-0 md:ml-6">
-          <h3
-            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out text-gray-300 text-sm md:text-base"
-            data-scroll
-          >
-            Desenvolvo aplicações modernas e escaláveis <br />
-            <strong className="text-white">
-              React, React Native, TypeScript, Node.js 
-            </strong>
-            <br/>
-            <strong className="text-white">
-              Figma, Docker, Git, ferramentas testes automatizados e muito mais
-            </strong>
-            <br />
-            Também possuo experiência em UX/UI.
-          </h3>
-        </div>
+            <div className="space-y-4">
+              <h1
+                className="opacity-0 translate-y-10 transition-all duration-1000 ease-out text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
+                data-scroll
+              >
+                Desenvolvedor Full-Stack Web e Mobile
+                <br />
+                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  Matheus Barboza
+                </span>
+              </h1>
+            </div>
 
-        {/* Bolhas decorativas */}
-        <div className="hidden sm:block opacity-50 z-0">
-          <div className="shadow-2xl w-96 h-96 rounded-full -mt-72"></div>
-          <div className="shadow-2xl w-96 h-96 rounded-full -mt-96"></div>
-          <div className="shadow-xl w-80 h-80 rounded-full ml-8 -mt-96"></div>
-        </div>
+            <p
+              className="opacity-0 translate-y-10 transition-all duration-1000 ease-out text-gray-300 text-lg md:text-xl max-w-2xl leading-relaxed"
+              data-scroll
+            >
+              Desenvolvo aplicações modernas e escaláveis <br />
+              <strong className="text-white">
+                React, React Native, TypeScript, Node.js 
+              </strong>
+              <br/>
+              <strong className="text-white">
+                Figma, Docker, Git, ferramentas testes automatizados e muito mais
+              </strong>
+              <br />
+              Além disso, também possuo experiência em UX/UI.
+            </p>
 
-        {/* Carrossel de Stacks */}
-        <div className="text-white relative pb-18">
-          <h3
-            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out uppercase font-semibold"
-            data-scroll
-          >
-            Minhas Stacks e Ferramentas
-          </h3>
-          <Swiper
-            modules={[Autoplay]}
-            spaceBetween={10}
-            slidesPerView={1}
-            pagination={{ clickable: true }}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            breakpoints={{
-              320: {
-                slidesPerView: 1, // Mostra 1 slide por vez
-                spaceBetween: 10, // Espaçamento menor entre os slides
-              },
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 2,
-                spaceBetween: 30,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 50,
-              },
-            }}
-            className="px-[48px] pb-[18px] sm:px-[24px] md:px-[16px] 2x1:w-400 x1:w-300 lg:w-250 md:w-174 sm:w-140"
-          >
-            {stacks.map((stack, index) => (
-              <SwiperSlide key={index}>
-                <div
-                  className="opacity-0 translate-y-10 transition-all duration-1000 ease-out group flex items-center bg-white bg-opacity-40 shadow-xl gap-4 px-6 py-4 mb-4 rounded-lg  mt-5 cursor-pointer hover:bg-gray-300 hover:bg-opacity-200 transition w-full sm:w-64 mx-auto"
-                  data-scroll
-                >
-                  <img className="w-9" src={stack.icon} alt={stack.name} />
-                  <div>
-                    <span className="text-gray-900">{stack.name}</span>
-                    <span className="text-xs text-gray-600 block">{stack.description}</span>
-                  </div>
+            <div
+              className="opacity-0 translate-y-10 transition-all duration-1000 ease-out flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              data-scroll
+            >
+              <button
+                onClick={scrollToProjects}
+                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                <FaEye className="mr-2" />
+                Ver Projetos
+              </button>
+            </div>
+          </div>
+
+          <div className="flex justify-center lg:justify-end">
+            <div
+              className="opacity-0 translate-y-10 transition-all duration-1000 ease-out relative"
+              data-scroll
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-3xl opacity-30 scale-110"></div>
+              
+              <div className="relative z-10 w-80 h-80 md:w-96 md:h-96 group cursor-pointer">
+                <Image
+                  src={Profile}
+                  alt="Matheus Barboza"
+                  fill
+                  className="rounded-full object-cover border-4 border-white/20 shadow-2xl"
+                  priority
+                />
+                
+                {/* Efeito de hover interativo */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300 cursor-pointer group-hover:animate-pulse"></div>
+                
+                {/* Partículas flutuantes */}
+                <div className="absolute -inset-4">
+                  <div className="absolute top-0 left-1/4 w-2 h-2 bg-blue-400/40 rounded-full animate-bounce" style={{animationDelay: '0s'}}></div>
+                  <div className="absolute top-1/4 right-0 w-1.5 h-1.5 bg-purple-400/40 rounded-full animate-bounce" style={{animationDelay: '0.5s'}}></div>
+                  <div className="absolute bottom-1/4 left-0 w-1 h-1 bg-pink-400/40 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
+                  <div className="absolute bottom-0 right-1/3 w-2 h-2 bg-indigo-400/40 rounded-full animate-bounce" style={{animationDelay: '1.5s'}}></div>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Skills Carousel */}
+      <div className="absolute bottom-0 left-0 right-0 bg-black/20 backdrop-blur-sm py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-center mb-4">
+            <h3 className="text-white/80 text-sm font-medium">Tecnologias que domino</h3>
+          </div>
+          <div className="relative overflow-hidden">
+            <div 
+              ref={scrollRef}
+              className="flex animate-scroll-infinite"
+              style={{ width: 'max-content' }}
+            >
+              {/* Criar 3 conjuntos para garantir loop perfeito */}
+              {Array.from({ length: 3 }, (_, setIndex) => 
+                stacks.map((stack, index) => (
+                  <div
+                    key={`set-${setIndex}-${index}`}
+                    className="flex-shrink-0 mx-4 flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20 transition-transform hover:scale-105"
+                  >
+                    <img
+                      src={stack.icon}
+                      alt={stack.name}
+                      className="w-6 h-6"
+                      loading="lazy"
+                    />
+                    <span className="text-white text-sm font-medium whitespace-nowrap">
+                      {stack.name}
+                    </span>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        .animate-scroll-infinite {
+          animation: scroll-infinite 60s linear infinite;
+          will-change: transform;
+        }
+        
+        .animate-scroll-infinite:hover {
+          animation-play-state: paused;
+        }
+        
+        @keyframes scroll-infinite {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-33.333333%);
+          }
+        }
+        
+        .animate-ping-slow {
+          animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+        
+        @keyframes ping-slow {
+          75%, 100% {
+            transform: scale(2);
+            opacity: 0;
+          }
+        }
+        
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          33% { transform: translateY(-10px) rotate(120deg); }
+          66% { transform: translateY(5px) rotate(240deg); }
+        }
+      `}</style>
     </div>
   );
 }

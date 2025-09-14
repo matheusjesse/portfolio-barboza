@@ -1,32 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import emailjs from '@emailjs/browser';
-import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt, FaClock, FaWhatsapp } from 'react-icons/fa';
+import { useEffect } from 'react';
+import { FaWhatsapp, FaLinkedin, FaEnvelope, FaMapMarkerAlt, FaCode, FaRocket } from 'react-icons/fa';
 
 export default function ContactForm() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [title, setTitle] = useState('');
-  const [message, setMessage] = useState('');
-
-  const isFormValid =
-    name.trim() !== '' && email.trim() !== '' && title.trim() !== '' && message.trim() !== '';
-
-  // Inicializar o EmailJS com a Public Key
-  useEffect(() => {
-    emailjs.init({
-      publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY, // Usando a variável de ambiente
-    });
-  }, []);
-
-  const redirectToWhatsApp = () => {
-    const phoneNumber = "5521996501743"; // Seu número sem caracteres especiais
-    const message = "Olá Matheus, gostaria de conversar sobre..."; // Mensagem pré-definida
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
-  };
-
+  
   // Configuração do IntersectionObserver para animações
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -39,160 +17,158 @@ export default function ContactForm() {
         });
       },
       {
-        threshold: 0.1, // Aciona a animação quando 10% do elemento estiver visível
+        threshold: 0.1,
       }
     );
 
-    // Observar todos os elementos com o atributo data-scroll
     const elements = document.querySelectorAll('[data-scroll]');
     elements.forEach((el) => observer.observe(el));
 
-    // Limpar o observer ao desmontar o componente
     return () => {
       elements.forEach((el) => observer.unobserve(el));
     };
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const redirectToWhatsApp = () => {
+    const phoneNumber = "5521996501743";
+    const message = "Olá Matheus! Vi seu portfólio e gostaria de conversar sobre uma oportunidade.";
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
 
-    // Enviar e-mail usando EmailJS
-    emailjs
-      .sendForm(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID, // Usando a variável de ambiente
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, // Usando a variável de ambiente
-        e.target,
-        {
-          publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY, // Usando a variável de ambiente
-        }
-      )
-      .then(
-        () => {
-          console.log('SUCCESS!');
-          alert('Mensagem enviada com sucesso!');
-          setName('');
-          setEmail('');
-          setTitle('');
-          setMessage('');
-        },
-        (error) => {
-          console.log('FAILED...', error);
-          alert('Ocorreu um erro ao enviar a mensagem. Tente novamente.');
-        }
-      );
+  const redirectToLinkedIn = () => {
+    window.open('https://linkedin.com/in/matheusjesse', '_blank');
+  };
+
+  const openEmail = () => {
+    window.open('mailto:matheus_jesse@hotmail.com?subject=Oportunidade Profissional&body=Olá Matheus, vi seu portfólio e gostaria de conversar sobre...', '_blank');
   };
 
   return (
-    <div className="max-w-screen-lg mx-auto p-3 w-full ">
-      <div className="grid grid-cols-1 md:grid-cols-12 border border-gray-300 rounded-lg overflow-hidden w-full ">
-        {/* Seção de contato - ocupa 4 colunas */}
-        <div className="md:col-span-4 p-10 text-white backdrop-blur-md bg-white/10 border-r border-white/20 ">
-          <h3 className="text-3xl sm:text-3xl leading-normal font-extrabold tracking-tight text-gray-700">
-          Vamos começar <span className="text-teal-500">Me chame no WhatsApp</span>
-          </h3>
-          <p className="mt-4 leading-7 text-gray-700">
-            Estou disponível para oportunidades de trabalho e colaborações.
+    <section id="contact" className="py-20 bg-white relative overflow-hidden">
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16" data-scroll>
+          <div className="inline-flex items-center px-4 py-2 bg-blue-50 rounded-full text-blue-600 text-sm font-medium mb-6">
+            <FaRocket className="mr-2" />
+            Vamos trabalhar juntos!
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            Pronto para
+            <br />
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              começar?
+            </span>
+          </h2>
+          
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Estou sempre aberto a novas oportunidades e projetos interessantes. 
+            Vamos conversar sobre como posso contribuir com seus objetivos!
           </p>
-  
-          <div className="flex items-center mt-5">
-            <FaMapMarkerAlt className="h-5 w-5 mr-2 text-gray-600" />
-            <span className="text-gray-700">Rio de Janeiro</span>
-          </div>
-          
-          <div className="flex items-center mt-5">
-            <FaEnvelope className="h-5 w-5 mr-2 text-gray-600" />
-            <span className="text-gray-700">matheus_jesse@hotmail.com</span>
-          </div>
-          
-          <div className="flex items-center mt-5">
-            <FaPhoneAlt className="h-5 w-5 mr-2 text-gray-600" />
-            <span className="text-gray-700">+55 (21) 99650-1743</span>
-          </div>
-  
-          <div className="flex items-center mt-5">
-            <FaClock className="h-5 w-5 mr-2 text-gray-600" />
-            <span className="text-gray-700">24/7</span>
-          </div>
-          
-          <button type="button" className="cursor-pointer  mt-5 gap-3 w-full text-white bg-teal-600  hover:bg-teal-700 focus:ring-2 focus:outline-none focus:ring-[#3b5998]/50 font-bold rounded-lg text-xl px-5 py-2.5 text-center inline-flex justify-center items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2"
-                  onClick={redirectToWhatsApp}
-                >
-            
-                  <FaWhatsapp className="text-2xl" />
-                  WhatsApp
-            
-                </button>
         </div>
-        
-        {/* Seção do formulário - ocupa 8 colunas */}
-        <div className="md:col-span-8  p-10 w-full flex items-center">
-          <form onSubmit={handleSubmit} className="w-full">
-            {/* Campos do formulário */}
-            <h4 className="text-2xl mb-2 sm:text-2xl leading-normal font-extrabold tracking-tight text-gray-700">
-              Caso prefira, você pode enviar um e-mail
-            </h4>
-            <div className="mb-4 " data-scroll>
-              <label className="block text-gray-700">Nome</label>
-              <input
-                type="text"
-                name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300"
-                required
-              />
+
+        {/* Contact Methods */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          
+          {/* WhatsApp Card */}
+          <div 
+            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out group"
+            data-scroll
+          >
+            <div 
+              onClick={redirectToWhatsApp}
+              className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-2"
+            >
+              <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <FaWhatsapp className="text-2xl text-white" />
+              </div>
+              
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">WhatsApp</h3>
+              <p className="text-gray-600 mb-6">
+                A forma mais rápida de me contactar. Ideal para conversar sobre oportunidades!
+              </p>
+              
+              <div className="flex items-center text-green-600 font-semibold">
+                <span>Chamar agora</span>
+                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </div>
             </div>
-  
-            <div className="mb-4 " data-scroll>
-              <label className="block text-gray-700">E-mail</label>
-              <input
-                type="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300"
-                required
-              />
+          </div>
+
+          {/* LinkedIn Card */}
+          <div 
+            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out group"
+            data-scroll
+          >
+            <div 
+              onClick={redirectToLinkedIn}
+              className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-2"
+            >
+              <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <FaLinkedin className="text-2xl text-white" />
+              </div>
+              
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">LinkedIn</h3>
+              <p className="text-gray-600 mb-6">
+                Vamos nos conectar! Perfeito para networking e discussões sobre carreira.
+              </p>
+              
+              <div className="flex items-center text-blue-600 font-semibold">
+                <span>Conectar</span>
+                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </div>
             </div>
-  
-            <div className="mb-4 " data-scroll>
-              <label className="block text-gray-700">Título</label>
-              <input
-                type="text"
-                name="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300"
-                required
-              />
+          </div>
+
+          {/* Email Card */}
+          <div 
+            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out group"
+            data-scroll
+          >
+            <div 
+              onClick={openEmail}
+              className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-2"
+            >
+              <div className="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <FaEnvelope className="text-2xl text-white" />
+              </div>
+              
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">Email</h3>
+              <p className="text-gray-600 mb-6">
+                Prefere algo mais formal? Ideal para propostas detalhadas.
+              </p>
+              
+              <div className="flex items-center text-purple-600 font-semibold">
+                <span>Enviar email</span>
+                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </div>
             </div>
-  
-            <div className="mb-4" data-scroll>
-              <label className="block text-gray-700">Mensagem</label>
-              <textarea
-                name="message"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300"
-                rows="4"
-                required
-              ></textarea>
+          </div>
+        </div>
+
+        {/* Bottom Info */}
+        <div className="text-center" data-scroll>
+          <div className="flex flex-col sm:flex-row items-center justify-center sm:space-x-8 space-y-4 sm:space-y-0 bg-gray-50 rounded-2xl px-6 py-6 border border-gray-200">
+            <div className="flex items-center text-gray-600">
+              <FaMapMarkerAlt className="mr-3 text-blue-500" />
+              <span>Rio de Janeiro, Brasil</span>
             </div>
-  
-            <div className="flex justify-end" data-scroll>
-              <button
-                type="submit"
-                disabled={!isFormValid}
-                className={`bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700 ${
-                  !isFormValid ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
-                }`}
-              >
-                Enviar
-              </button>
+            
+            <div className="flex items-center text-gray-600">
+              <FaCode className="mr-3 text-green-500" />
+              <span>Disponível</span>
             </div>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
