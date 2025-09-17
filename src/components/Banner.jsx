@@ -146,6 +146,9 @@ export default function Banner() {
                       alt={stack.name}
                       className="w-6 h-6"
                       loading="lazy"
+                      decoding="async"
+                      width="24"
+                      height="24"
                     />
                     <span className="text-white text-sm font-medium whitespace-nowrap">
                       {stack.name}
