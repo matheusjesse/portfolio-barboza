@@ -1,13 +1,15 @@
 ﻿'use client';
 
-import { useEffect, useRef } from 'react';
-import { FaEye, FaDownload } from 'react-icons/fa';
+import { useEffect, useRef, useState } from 'react';
+import { FaEye, FaDownload, FaCalculator } from 'react-icons/fa';
 import Image from 'next/image';
 import Profile from '../utils/images/profile.jpg';
 import { stacks } from '../utils/stacks';
+import QuoteModal from './QuoteModal';
 
 export default function Banner() {
   const scrollRef = useRef(null);
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -86,6 +88,14 @@ export default function Banner() {
               >
                 <FaEye className="mr-2" />
                 Ver Projetos
+              </button>
+              
+              <button
+                onClick={() => setIsQuoteModalOpen(true)}
+                className="inline-flex items-center px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold rounded-xl hover:bg-white/20 hover:border-white/50 transition-all duration-300"
+              >
+                <FaCalculator className="mr-2" />
+                Orçamento Grátis
               </button>
             </div>
           </div>
@@ -201,6 +211,12 @@ export default function Banner() {
           66% { transform: translateY(5px) rotate(240deg); }
         }
       `}</style>
+      
+      {/* Modal de Orçamento */}
+      <QuoteModal 
+        isOpen={isQuoteModalOpen} 
+        onClose={() => setIsQuoteModalOpen(false)} 
+      />
     </div>
   );
 }
