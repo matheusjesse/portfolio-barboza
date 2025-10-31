@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
-import { FaWhatsapp, FaLinkedin, FaEnvelope, FaMapMarkerAlt, FaCode, FaRocket } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { FaWhatsapp, FaLinkedin, FaEnvelope, FaMapMarkerAlt, FaCode, FaRocket, FaCalculator, FaLightbulb, FaBolt, FaBullseye, FaShieldAlt } from 'react-icons/fa';
+import QuoteModal from './QuoteModal';
 
 export default function ContactForm() {
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   
   // Configuração do IntersectionObserver para animações
   useEffect(() => {
@@ -50,10 +52,6 @@ export default function ContactForm() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16" data-scroll>
-          <div className="inline-flex items-center px-4 py-2 bg-blue-50 rounded-full text-blue-600 text-sm font-medium mb-6">
-            <FaRocket className="mr-2" />
-            Vamos trabalhar juntos!
-          </div>
           
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
             Pronto para
@@ -63,10 +61,61 @@ export default function ContactForm() {
             </span>
           </h2>
           
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
             Estou sempre aberto a novas oportunidades e projetos interessantes. 
             Vamos conversar sobre como posso contribuir com seus objetivos!
           </p>
+          
+          {/* CTA Principal - Botão de Orçamento */}
+          <div className="flex justify-center">
+            {/* Botão de orçamento removido conforme solicitado */}
+          </div>
+        </div>
+
+        {/* Quick Quote Card - Destaque especial */}
+        <div className="mb-12" data-scroll>
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-8 text-white relative overflow-hidden">
+            {/* Background decorativo */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-12 -translate-x-12"></div>
+            
+            <div className="relative z-10 text-center">
+              
+              <h3 className="text-3xl font-bold mb-4 flex items-center justify-center">
+                Orçamento Inteligente em 5 Minutos
+              </h3>
+              
+              <p className="text-blue-100 text-lg mb-6 max-w-2xl mx-auto">
+                Responda algumas perguntas rápidas e receba uma proposta detalhada e personalizada!
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div className="bg-white/10 rounded-2xl p-4">
+                  <FaBolt className="text-2xl mb-2 text-yellow-300 mx-auto" />
+                  <div className="font-bold">Resposta Rápida</div>
+                  <div className="text-blue-200 text-sm">Em até 24 horas</div>
+                </div>
+                <div className="bg-white/10 rounded-2xl p-4">
+                  <FaBullseye className="text-2xl mb-2 text-yellow-300 mx-auto" />
+                  <div className="font-bold">100% Personalizado</div>
+                  <div className="text-blue-200 text-sm">Para seu projeto específico</div>
+                </div>
+                <div className="bg-white/10 rounded-2xl p-4">
+                  <FaShieldAlt className="text-2xl mb-2 text-yellow-300 mx-auto" />
+                  <div className="font-bold">Sem Compromisso</div>
+                  <div className="text-blue-200 text-sm">Análise gratuita</div>
+                </div>
+              </div>
+              
+              <button
+                onClick={() => setIsQuoteModalOpen(true)}
+                className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-bold text-lg rounded-2xl hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-xl"
+              >
+                <FaCalculator className="mr-3" />
+                Começar Orçamento Agora
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Contact Methods */}
@@ -169,6 +218,12 @@ export default function ContactForm() {
           </div>
         </div>
       </div>
+      
+      {/* Modal de Orçamento */}
+      <QuoteModal 
+        isOpen={isQuoteModalOpen} 
+        onClose={() => setIsQuoteModalOpen(false)} 
+      />
     </section>
   );
 }

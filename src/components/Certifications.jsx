@@ -1,28 +1,25 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { FaGraduationCap, FaRobot, FaLaptopCode, FaPalette } from 'react-icons/fa';
+import { useEffect } from "react";
 
 export default function Certifications() {
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const observer = new window.IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.remove('opacity-0', 'translate-y-10');
-            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove("opacity-0", "translate-y-10");
+            entry.target.classList.add("opacity-100", "translate-y-0");
           }
         });
       },
-      { 
+      {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px' // Adiciona um pequeno offset
+        rootMargin: "0px 0px -50px 0px",
       }
     );
-
-    const elements = document.querySelectorAll('[data-scroll]');
+    const elements = document.querySelectorAll("[data-scroll]");
     elements.forEach((el) => observer.observe(el));
-
     return () => {
       elements.forEach((el) => observer.unobserve(el));
     };
@@ -30,116 +27,73 @@ export default function Certifications() {
 
   return (
     <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50 flex items-center justify-center min-h-svh">
-      <div className="container mx-auto px-4 max-w-6xl">
-        {/* Título */}
+      <div className="container mx-auto px-4 max-w-3xl">
         <h2
-          className="text-4xl md:text-5xl font-bold text-center mb-34 opacity-0 translate-y-10 transition-all duration-1000 ease-out"
+          className="text-4xl md:text-5xl font-bold text-center mb-16 opacity-0 translate-y-10 transition-all duration-1000 ease-out"
           data-scroll
         >
-          <span className="text-gray-800">
-            Certificações e Cursos
-          </span>
+          <span className="text-gray-800">Certificações e Cursos</span>
         </h2>
-
-        {/* Cards - IMPORTANTE: Adicionei data-scroll aqui */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-24">
-          {/* Card 1 */}
-          <div
-            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out bg-white p-8 rounded-xl shadow-lg  hover:shadow-xl"
-            data-scroll // Adicionei este atributo
-          >
-            <div className="flex items-start gap-4">
-              <div className="bg-blue-100 p-3 rounded-full">
-                <FaGraduationCap className="text-blue-600 text-2xl" />
+        <ol className="relative border-l-2 border-gray-100 ml-6">
+          {/* Item 1 */}
+          <li className="mb-14 ml-0 relative opacity-0 translate-y-10 transition-all duration-1000 ease-out" data-scroll>
+            <span className="absolute -left-7 top-7 w-3.5 h-3.5 bg-gray-300 border-2 border-white rounded-full"></span>
+            <div className="bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-100">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                <h3 className="text-xl font-bold text-gray-800 tracking-tight">Análise e Desenvolvimento de Sistemas</h3>
+                <span className="inline-block bg-gray-50 text-gray-600 text-xs font-normal px-3 py-1 rounded-full border border-gray-200">Graduação</span>
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-700">Análise e Desenvolvimento de Sistemas</h3>
-                <div className="flex items-center mt-2">
-                  <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                    Graduação
-                  </span>
-                  <span className="ml-2 text-sm text-gray-600">Concluído</span>
-                </div>
-                <p className="mt-3 text-gray-600 flex items-center">
-                  <span className="font-medium">Estácio</span>
-                </p>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-2 gap-2">
+                <span className="text-base text-gray-500 font-normal">Estácio</span>
+                <span className="text-xs text-gray-400 font-medium bg-gray-100 px-2 py-0.5 rounded">Concluído</span>
               </div>
             </div>
-          </div>
-
-          {/* Card 2 */}
-          <div
-            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-100 bg-white p-8 rounded-xl shadow-lg  hover:shadow-xl"
-            data-scroll // Adicionei este atributo
-          >
-            <div className="flex items-start gap-4">
-              <div className="bg-purple-100 p-3 rounded-full">
-                <FaRobot className="text-purple-600 text-2xl" />
+          </li>
+          {/* Item 2 */}
+          <li className="mb-14 ml-0 relative opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-100" data-scroll>
+            <span className="absolute -left-7 top-7 w-3.5 h-3.5 bg-gray-300 border-2 border-white rounded-full"></span>
+            <div className="bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-100">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                <h3 className="text-xl font-bold text-gray-800 tracking-tight">Inteligência Artificial</h3>
+                <span className="inline-block bg-gray-50 text-gray-600 text-xs font-normal px-3 py-1 rounded-full border border-gray-200">Pós Graduação</span>
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-700">Inteligência Artificial</h3>
-                <div className="flex items-center mt-2">
-                  <span className="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                    Pós Graduação
-                  </span>
-                  <span className="ml-2 text-sm text-gray-600">Cursando</span>
-                </div>
-                <p className="mt-3 text-gray-600 flex items-center">
-                  <span className="font-medium">Anhembi Morumbi</span>
-                </p>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-2 gap-2">
+                <span className="text-base text-gray-500 font-normal">Anhembi Morumbi</span>
+                <span className="text-xs text-gray-400 font-medium bg-gray-100 px-2 py-0.5 rounded">Cursando</span>
               </div>
             </div>
-          </div>
-
-          {/* Card 3 */}
-          <div
-            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-200 bg-white p-8 rounded-xl shadow-lg  hover:shadow-xl"
-            data-scroll // Adicionei este atributo
-          >
-            <div className="flex items-start gap-4">
-              <div className="bg-teal-100 p-3 rounded-full">
-                <FaPalette className="text-teal-600 text-2xl" />
+          </li>
+          {/* Item 3 */}
+          <li className="mb-14 ml-0 relative opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-200" data-scroll>
+            <span className="absolute -left-7 top-7 w-3.5 h-3.5 bg-gray-300 border-2 border-white rounded-full"></span>
+            <div className="bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-100">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                <h3 className="text-xl font-bold text-gray-800 tracking-tight">Google UX Design</h3>
+                <span className="inline-block bg-gray-50 text-gray-600 text-xs font-normal px-3 py-1 rounded-full border border-gray-200">Curso</span>
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-700">Google UX Design</h3>
-                <div className="flex items-center mt-2">
-                  <span className="bg-teal-100 text-teal-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                    Curso
-                  </span>
-                  <span className="ml-2 text-sm text-gray-600">Concluído</span>
-                </div>
-                <p className="mt-3 text-gray-600 flex items-center">
-                  <span className="font-medium">Coursera</span>
-                </p>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-2 gap-2">
+                <span className="text-base text-gray-500 font-normal">Coursera</span>
+                <span className="text-xs text-gray-400 font-medium bg-gray-100 px-2 py-0.5 rounded">Concluído</span>
               </div>
             </div>
-          </div>
-
-          {/* Card 4 */}
-          <div
-            className="opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-300 bg-white p-8 rounded-xl shadow-lg  hover:shadow-xl"
-            data-scroll // Adicionei este atributo
-          >
-            <div className="flex items-start gap-4">
-              <div className="bg-orange-100 p-3 rounded-full">
-                <FaLaptopCode className="text-orange-600 text-2xl" />
+          </li>
+          {/* Item 4 */}
+          <li className="mb-14 ml-0 relative opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-300" data-scroll>
+            <span className="absolute -left-7 top-7 w-3.5 h-3.5 bg-gray-300 border-2 border-white rounded-full"></span>
+            <div className="bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-100">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                <h3 className="text-xl font-bold text-gray-800 tracking-tight">Desenvolvimento Full-Stack</h3>
+                <span className="inline-block bg-gray-50 text-gray-600 text-xs font-normal px-3 py-1 rounded-full border border-gray-200">Curso</span>
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-700">Desenvolvimento Full-Stack</h3>
-                <div className="flex items-center mt-2">
-                  <span className="bg-orange-100 text-orange-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                    Curso
-                  </span>
-                  <span className="ml-2 text-sm text-gray-600">Concluído</span>
-                </div>
-                <p className="mt-3 text-gray-600 flex items-center">
-                  <span className="font-medium">Trybe</span>
-                </p>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-2 gap-2">
+                <span className="text-base text-gray-500 font-normal">Trybe</span>
+                <span className="text-xs text-gray-400 font-medium bg-gray-100 px-2 py-0.5 rounded">Concluído</span>
               </div>
             </div>
-          </div>
-        </div>
+          </li>
+        </ol>
       </div>
     </section>
   );
 }
+// ...existing code...

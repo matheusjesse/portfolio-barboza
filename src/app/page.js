@@ -16,9 +16,7 @@ export default function Home() {
         <Projects />
         <Certifications />
         <section id="contact" className="py-16 bg-white min-h-screen flex items-center justify-center">
-          
           <div className="container mx-auto px-4">
-          <h2 className="text-3xl text-gray-800 font-bold text-center mb-8">Sinta-se a vontade para entrar em contato</h2>
             <ContactForm />
           </div>
         </section>
