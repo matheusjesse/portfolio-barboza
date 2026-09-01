@@ -126,7 +126,6 @@ body {
 }
 
 .card:hover {
-  border-color: #fdba74;
   box-shadow: var(--shadow-md);
   transform: translateY(-3px);
 }

@@ -91,7 +91,7 @@ export default function Contact() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group card text-center cursor-pointer"
+                className="group card text-center transition-all duration-300 hover:-translate-y-1"
                 style={{
                   padding: '2.25rem 1.75rem',
                   display: 'flex',
@@ -99,6 +99,28 @@ export default function Contact() {
                   height: '100%',
                   borderRadius: 'var(--radius-card)',
                   textDecoration: 'none'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--border-light)';
+                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.06)';
+                  const btn = e.currentTarget.querySelector('.contact-btn');
+                  if (btn) {
+                    btn.style.background = iconColor;
+                    btn.style.color = '#ffffff';
+                    btn.style.borderColor = iconColor;
+                    btn.style.boxShadow = `0 4px 14px ${iconColor}40`;
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--border-light)';
+                  e.currentTarget.style.boxShadow = 'none';
+                  const btn = e.currentTarget.querySelector('.contact-btn');
+                  if (btn) {
+                    btn.style.background = '#f8fafc';
+                    btn.style.color = 'var(--text-dark)';
+                    btn.style.borderColor = '#e2e8f0';
+                    btn.style.boxShadow = 'none';
+                  }
                 }}
               >
                 <div
@@ -114,7 +136,7 @@ export default function Contact() {
                   {description}
                 </p>
                 <div
-                  className="text-xs font-bold tracking-wider flex items-center justify-center gap-2 uppercase transition-all duration-300"
+                  className="contact-btn text-xs font-bold tracking-wider flex items-center justify-center gap-2 uppercase transition-all duration-300"
                   style={{
                     background: '#f8fafc',
                     color: 'var(--text-dark)',
@@ -122,18 +144,6 @@ export default function Contact() {
                     padding: '0.85rem 1.25rem',
                     borderRadius: 'var(--radius-input)',
                     marginTop: 'auto'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = iconColor;
-                    e.currentTarget.style.color = '#ffffff';
-                    e.currentTarget.style.borderColor = iconColor;
-                    e.currentTarget.style.boxShadow = `0 4px 14px ${iconColor}40`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = '#f8fafc';
-                    e.currentTarget.style.color = 'var(--text-dark)';
-                    e.currentTarget.style.borderColor = '#e2e8f0';
-                    e.currentTarget.style.boxShadow = 'none';
                   }}
                 >
                   {action}

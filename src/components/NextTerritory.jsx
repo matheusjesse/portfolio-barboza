@@ -184,9 +184,9 @@ export default function NextTerritory() {
                     <span
                       className="hidden sm:inline-flex items-center text-[11px] font-bold px-3 py-1 rounded-full"
                       style={{
-                        background: isDone ? '#f0fdf4' : '#fff7ed',
-                        color: isDone ? '#16a34a' : '#c2410c',
-                        border: isDone ? '1px solid #bbf7d0' : '1px solid #ffedd5',
+                        background: isDone ? '#2563eb' : '#ea580c',
+                        color: '#ffffff',
+                        border: isDone ? '1px solid #1d4ed8' : '1px solid #c2410c',
                       }}
                     >
                       {group.status}
@@ -226,11 +226,10 @@ export default function NextTerritory() {
                                 </h4>
                               </div>
                               <span
-                                className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider px-2 py-0.5"
+                                className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5"
                                 style={{
-                                  background: itemDone ? '#f0fdf4' : '#fff7ed',
-                                  color: itemDone ? '#16a34a' : '#c2410c',
-                                  border: itemDone ? '1px solid #bbf7d0' : '1px solid #ffedd5',
+                                  background: itemDone ? '#2563eb' : '#ea580c',
+                                  color: '#ffffff',
                                   borderRadius: 'var(--radius-badge)',
                                 }}
                               >
