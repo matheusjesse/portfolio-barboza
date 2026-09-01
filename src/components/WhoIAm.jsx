@@ -125,7 +125,7 @@ export default function WhoIAm() {
             </p>
 
             <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--text-muted)' }}>
-              Hoje estou expandindo meu repertório em direção à Gestão de Produto —
+              Hoje estou expandindo meu repertório em direção à Gestão de Produto,
               não para deixar de construir, mas para entender melhor os problemas,
               decisões e objetivos por trás do que construímos.
             </p>
@@ -183,7 +183,7 @@ export default function WhoIAm() {
                 }}
               >
                 <FaMapMarkerAlt size={14} style={{ color: 'var(--text-muted)' }} />
-                Queimados, RJ — Brasil
+                Queimados, RJ, Brasil
               </div>
             </div>
           </div>
