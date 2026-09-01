@@ -20,8 +20,8 @@ const EXPERIENCES = [
     current: false,
   },
   {
-    company: 'Freelance / Autônomo',
-    role: 'Desenvolvedor Front-End Freelancer',
+    company: 'Freelance',
+    role: 'Desenvolvedor Front-End',
     period: '2023 — 2024',
     description: 'Desenvolvimento de aplicações web responsivas e landing pages de alta conversão. Foco em arquitetura front-end, componentes reutilizáveis, UI/UX, SEO e fidelidade de design.',
     technologies: ['React', 'JavaScript', 'HTML5', 'CSS3', 'UI/UX', 'SEO'],
