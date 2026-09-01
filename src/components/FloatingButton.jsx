@@ -1,48 +1,33 @@
-'use client'
-import { useEffect, useState } from "react";
+'use client';
 
-const FloatingButton = () => {
-  const [showButton, setShowButton] = useState(false);
+import { useEffect, useState } from 'react';
+import { FaArrowUp } from 'react-icons/fa';
 
-  // Função para rolar a página para o topo
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth", // Rola suavemente
-    });
-  };
+export default function FloatingButton() {
+  const [visible, setVisible] = useState(false);
 
-  // Verifica a posição do scroll
   useEffect(() => {
-    const handleScroll = () => {
-      const aboutMeSection = document.getElementById("sobre-mim"); // ID da seção "Sobre Mim"
-      if (aboutMeSection) {
-        const aboutMePosition = aboutMeSection.offsetTop;
-        if (window.scrollY >= aboutMePosition) {
-          setShowButton(true); // Mostra o botão se o scroll estiver na seção "Sobre Mim" ou abaixo
-        } else {
-          setShowButton(false); // Esconde o botão caso contrário
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll); // Limpa o listener
+    const handleScroll = () => setVisible(window.scrollY > 400);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Retorna o botão flutuante
   return (
-    <>
-      {showButton && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-3 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 transition-colors"
-        >
-          ↑
-        </button>
-      )}
-    </>
+    <button
+      id="floating-scroll-top"
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      aria-label="Voltar ao topo"
+      className="fixed bottom-8 right-8 w-10 h-10 rounded-full flex items-center justify-center z-40"
+      style={{
+        background: 'linear-gradient(135deg, #4f46e5, #7c3aed)',
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0) scale(1)' : 'translateY(16px) scale(0.8)',
+        transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)',
+        pointerEvents: visible ? 'auto' : 'none',
+        boxShadow: '0 4px 16px rgba(79,70,229,0.35)',
+      }}
+    >
+      <FaArrowUp size={13} color="white" />
+    </button>
   );
-};
-
-export default FloatingButton;
+}

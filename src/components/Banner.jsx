@@ -1,222 +1,197 @@
-﻿'use client';
+'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { FaEye, FaDownload, FaCalculator } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import { BsHandIndexThumb } from 'react-icons/bs';
 import Image from 'next/image';
-import Profile from '../utils/images/profile.jpg';
+import HeroImage from '../utils/images/representations-user-experience-interface-design.png';
 import { stacks } from '../utils/stacks';
-import QuoteModal from './QuoteModal';
 
 export default function Banner() {
-  const scrollRef = useRef(null);
-  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.remove('opacity-0', 'translate-y-10');
-            entry.target.classList.add('opacity-100', 'translate-y-0');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll('[data-scroll]');
-    elements.forEach((el) => observer.observe(el));
-
-    return () => elements.forEach((el) => observer.unobserve(el));
+    setMounted(true);
   }, []);
 
-  const scrollToProjects = () => {
-    const section = document.getElementById('projetos');
-    if (section) section.scrollIntoView({ behavior: 'smooth' });
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const mobileStacks = stacks.filter((s) =>
+    ['React Native', 'TypeScript', 'Expo', 'React', 'Node.js', 'Flutter', 'Jest', 'Figma', 'Git', 'Docker', 'NestJS', 'PostgreSQL'].includes(s.name)
+  );
+
+  const tickerStacks = [...mobileStacks, ...mobileStacks, ...mobileStacks];
+
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 overflow-hidden">
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-5rem)]">
-          
-          <div className="text-center lg:text-left space-y-8">
-            <div 
-              className="opacity-0 translate-y-10 transition-all duration-1000 ease-out inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm font-medium"
-              data-scroll
-            >
-              <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-              Disponível
-            </div>
-
-            <div className="space-y-4">
-              <h1
-                className="opacity-0 translate-y-10 transition-all duration-1000 ease-out text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
-                data-scroll
-              >
-                Desenvolvedor Full-Stack Web e Mobile
-                <br />
-                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  Matheus Barboza
-                </span>
-              </h1>
-            </div>
-
-            <p
-              className="opacity-0 translate-y-10 transition-all duration-1000 ease-out text-gray-300 text-lg md:text-xl max-w-2xl leading-relaxed"
-              data-scroll
-            >
-              Desenvolvo aplicações modernas e escaláveis <br />
-              <strong className="text-white">
-                React, React Native, TypeScript, Node.js 
-              </strong>
-              <br/>
-              <strong className="text-white">
-                Figma, Docker, Git, ferramentas testes automatizados e muito mais
-              </strong>
-              <br />
-              Além disso, também possuo experiência em UX/UI.
-            </p>
-
-            <div
-              className="opacity-0 translate-y-10 transition-all duration-1000 ease-out flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-              data-scroll
-            >
-              <button
-                onClick={scrollToProjects}
-                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
-              >
-                <FaEye className="mr-2" />
-                Ver Projetos
-              </button>
-              
-              <button
-                onClick={() => setIsQuoteModalOpen(true)}
-                className="inline-flex items-center px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold rounded-xl hover:bg-white/20 hover:border-white/50 transition-all duration-300"
-              >
-                <FaCalculator className="mr-2" />
-                Orçamento Grátis
-              </button>
-            </div>
-          </div>
-
-          <div className="flex justify-center lg:justify-end">
-            <div
-              className="opacity-0 translate-y-10 transition-all duration-1000 ease-out relative"
-              data-scroll
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-3xl opacity-30 scale-110"></div>
-              
-              <div className="relative z-10 w-80 h-80 md:w-96 md:h-96 group cursor-pointer">
-                <Image
-                  src={Profile}
-                  alt="Matheus Barboza"
-                  fill
-                  className="rounded-full object-cover border-4 border-white/20 shadow-2xl"
-                  priority
-                />
-                
-                {/* Efeito de hover interativo */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300 cursor-pointer group-hover:animate-pulse"></div>
-                
-                {/* Partículas flutuantes */}
-                <div className="absolute -inset-4">
-                  <div className="absolute top-0 left-1/4 w-2 h-2 bg-blue-400/40 rounded-full animate-bounce" style={{animationDelay: '0s'}}></div>
-                  <div className="absolute top-1/4 right-0 w-1.5 h-1.5 bg-purple-400/40 rounded-full animate-bounce" style={{animationDelay: '0.5s'}}></div>
-                  <div className="absolute bottom-1/4 left-0 w-1 h-1 bg-pink-400/40 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
-                  <div className="absolute bottom-0 right-1/3 w-2 h-2 bg-indigo-400/40 rounded-full animate-bounce" style={{animationDelay: '1.5s'}}></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Skills Carousel */}
-      <div className="absolute bottom-0 left-0 right-0 bg-black/20 backdrop-blur-sm py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-center mb-4">
-            <h3 className="text-white/80 text-sm font-medium">Tecnologias que domino</h3>
-          </div>
-          <div className="relative overflow-hidden">
-            <div 
-              ref={scrollRef}
-              className="flex animate-scroll-infinite"
-              style={{ width: 'max-content' }}
-            >
-              {/* Criar 3 conjuntos para garantir loop perfeito */}
-              {Array.from({ length: 3 }, (_, setIndex) => 
-                stacks.map((stack, index) => (
-                  <div
-                    key={`set-${setIndex}-${index}`}
-                    className="flex-shrink-0 mx-4 flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20 transition-transform hover:scale-105"
-                  >
-                    <img
-                      src={stack.icon}
-                      alt={stack.name}
-                      className="w-6 h-6"
-                      loading="lazy"
-                      decoding="async"
-                      width="24"
-                      height="24"
-                    />
-                    <span className="text-white text-sm font-medium whitespace-nowrap">
-                      {stack.name}
-                    </span>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <style jsx>{`
-        .animate-scroll-infinite {
-          animation: scroll-infinite 60s linear infinite;
-          will-change: transform;
-        }
-        
-        .animate-scroll-infinite:hover {
-          animation-play-state: paused;
-        }
-        
-        @keyframes scroll-infinite {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-33.333333%);
-          }
-        }
-        
-        .animate-ping-slow {
-          animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
-        }
-        
-        @keyframes ping-slow {
-          75%, 100% {
-            transform: scale(2);
-            opacity: 0;
-          }
-        }
-        
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          33% { transform: translateY(-10px) rotate(120deg); }
-          66% { transform: translateY(5px) rotate(240deg); }
-        }
-      `}</style>
-      
-      {/* Modal de Orçamento */}
-      <QuoteModal 
-        isOpen={isQuoteModalOpen} 
-        onClose={() => setIsQuoteModalOpen(false)} 
+    <section
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #fbbf24 0%, #f97316 45%, #ea580c 80%, #9a3412 100%)'
+      }}
+    >
+      {/* Base Vibrant Solar Yellow/Orange Layer */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          background: 'radial-gradient(ellipse at 50% 25%, rgba(254, 240, 138, 0.4) 0%, rgba(249, 115, 22, 0.2) 60%, transparent 100%)'
+        }}
       />
-    </div>
+
+      {/* Tailwind UI Top-Left Glowing Polygon Blob (Yellow/Amber Glow) */}
+      <div
+        className="absolute inset-x-0 -top-40 z-0 transform-gpu overflow-hidden blur-3xl sm:-top-80 pointer-events-none"
+        aria-hidden="true"
+      >
+        <div
+          className="relative left-[calc(50%-18rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] opacity-80 sm:left-[calc(50%-36rem)] sm:w-[72.1875rem]"
+          style={{
+            background: 'linear-gradient(to top right, #fef08a 0%, #f59e0b 50%, #ea580c 100%)',
+            clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
+          }}
+        />
+      </div>
+
+      {/* Tailwind UI Bottom-Right Glowing Polygon Blob (Orange/Gold Glow) */}
+      <div
+        className="absolute inset-x-0 top-[calc(100%-15rem)] z-0 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)] pointer-events-none"
+        aria-hidden="true"
+      >
+        <div
+          className="relative left-[calc(50%+11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] opacity-70 sm:left-[calc(50%+25rem)] sm:w-[72.1875rem]"
+          style={{
+            background: 'linear-gradient(to top right, #fbbf24 0%, #f97316 50%, #ea580c 100%)',
+            clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
+          }}
+        />
+      </div>
+
+      {/* Product Journey Waves (Organic User Flow Lines - Spaced Vertically Apart) */}
+      <svg 
+        className="absolute inset-0 w-full h-full pointer-events-none z-0"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1440 900"
+        preserveAspectRatio="none"
+      >
+        {/* Flow Line 1 - Top Area Wave Pathway */}
+        <path 
+          className="animate-flow-dash"
+          d="M-100,120 C300,280 650,60 1050,240 C1350,380 1500,180 1600,120" 
+          fill="none" 
+          stroke="rgba(255, 255, 255, 0.35)" 
+          strokeWidth="2" 
+          strokeDasharray="10 8"
+        />
+        {/* Flow Line 2 - Middle Area Wave Accent */}
+        <path 
+          className="animate-wave-float-1"
+          d="M-100,450 C380,280 780,580 1200,380 C1420,240 1550,360 1600,400" 
+          fill="none" 
+          stroke="rgba(255, 255, 255, 0.25)" 
+          strokeWidth="1.5" 
+        />
+        {/* Flow Line 3 - Bottom Area Deep Ambient Wave (Spaced Down towards the bottom) */}
+        <path 
+          className="animate-wave-float-2"
+          d="M-100,780 C300,620 700,880 1100,680 C1350,560 1500,780 1650,750" 
+          fill="none" 
+          stroke="rgba(255, 255, 255, 0.2)" 
+          strokeWidth="1.5" 
+        />
+      </svg>
+
+      <div className="section-container relative z-10 flex-1 flex items-center justify-center w-full">
+        <div
+          className="flex flex-col items-center text-center w-full max-w-3xl mx-auto"
+          style={{ paddingTop: '40px', paddingBottom: '40px' }}
+        >
+          {/* CENTERED TEXT CONTENT */}
+          <div
+            className="flex flex-col items-center text-center w-full"
+            style={{
+              opacity: mounted ? 1 : 0,
+              transform: mounted ? 'translateY(0)' : 'translateY(20px)',
+              transition: 'opacity 0.8s ease, transform 0.8s ease',
+            }}
+          >
+            <h1
+              className="leading-none text-white text-center w-full px-2"
+              style={{
+                fontFamily: "'Caveat', 'Dancing Script', cursive",
+                fontSize: 'clamp(2.5rem, 11.5vw, 7.5rem)',
+                fontWeight: 700,
+                letterSpacing: '-0.02em',
+                marginBottom: '2rem',
+                textShadow: '0 4px 20px rgba(0,0,0,0.15)',
+              }}
+            >
+              Matheus Barboza
+            </h1>
+
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 w-full px-4" style={{ marginBottom: '1.75rem' }}>
+              <button
+                id="hero-cta-quick"
+                onClick={() => scrollToSection('quem-sou')}
+                className="btn-primary text-sm sm:text-base px-5 py-3 sm:px-6 sm:py-3.5"
+                style={{ background: 'white', color: '#ea580c' }}
+              >
+                Quem sou
+              </button>
+              <button
+                id="hero-cta-explore"
+                onClick={() => scrollToSection('o-que-construo')}
+                className="btn-secondary text-sm sm:text-base px-5 py-3 sm:px-6 sm:py-3.5"
+                style={{ borderColor: 'rgba(255,255,255,0.3)', color: 'white' }}
+              >
+                O que construo
+              </button>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-6 px-4">
+              <a href="https://linkedin.com/in/matheusjesse" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs sm:text-sm transition-opacity hover:opacity-70 text-white font-medium">
+                <FaLinkedin size={16} /> LinkedIn
+              </a>
+              <span className="opacity-40 text-white text-xs sm:text-sm">|</span>
+              <a href="https://github.com/matheusjesse" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs sm:text-sm transition-opacity hover:opacity-70 text-white font-medium">
+                <FaGithub size={16} /> GitHub
+              </a>
+              <span className="opacity-40 text-white text-xs sm:text-sm">|</span>
+              <span className="text-xs sm:text-sm text-white font-medium opacity-90">
+                Rio de Janeiro
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* PREMIUM HERO SCROLL INDICATOR */}
+      <button
+        onClick={() => scrollToSection('quem-sou')}
+        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-20 group text-white/85 hover:text-white transition-all bg-transparent border-none"
+        aria-label="Rolar para baixo"
+      >
+        <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', opacity: 0.8 }}>
+          Role para explorar
+        </span>
+
+        {/* Hand Pointer Icon on Mobile */}
+        <div className="sm:hidden animate-bounce mt-1">
+          <BsHandIndexThumb size={22} className="text-white drop-shadow-md" />
+        </div>
+
+        {/* Classic Mouse Icon on Desktop */}
+        <div
+          className="hidden sm:flex w-5 h-8 border-2 border-white/40 rounded-full justify-center p-1 group-hover:border-white transition-colors"
+          style={{ width: '20px', height: '32px', border: '2px solid rgba(255,255,255,0.4)', borderRadius: '9999px', justifyContent: 'center', padding: '4px' }}
+        >
+          <div
+            className="w-1 h-2 bg-white rounded-full animate-bounce"
+            style={{ width: '4px', height: '8px', background: 'white', borderRadius: '9999px' }}
+          />
+        </div>
+      </button>
+    </section>
   );
 }

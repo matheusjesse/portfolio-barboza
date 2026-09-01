@@ -1,218 +1,208 @@
-'use client'
+'use client';
 
 import { useState, useEffect } from 'react';
-import { FaLinkedin, FaGithub, FaUser, FaBriefcase, FaEnvelope, FaHome, FaChevronDown } from 'react-icons/fa'; 
+import { FaLinkedin, FaGithub, FaHome, FaUser, FaBriefcase, FaCompass, FaEnvelope } from 'react-icons/fa';
+
+const NAV_ITEMS = [
+  { id: 'hero', label: 'Início', icon: FaHome },
+  { id: 'quem-sou', label: 'Quem sou', icon: FaUser },
+  { id: 'experiencia', label: 'Experiência', icon: FaBriefcase },
+  { id: 'proximo-territorio', label: 'Competências', icon: FaCompass },
+  { id: 'contato', label: 'Contato', icon: FaEnvelope },
+];
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      setScrolled(isScrolled);
+      setScrolled(window.scrollY > 40);
+
+      if (window.scrollY < 250) {
+        setActiveSection('hero');
+        return;
+      }
+
+      const sectionIds = ['quem-sou', 'experiencia', 'proximo-territorio', 'contato'];
+      const scrollPos = window.scrollY + 250;
+
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (el && el.offsetTop <= scrollPos) {
+          setActiveSection(sectionIds[i]);
+          break;
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false); // Fechar menu mobile após click
+  const scrollToSection = (id) => {
+    if (id === 'hero') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
     setIsOpen(false);
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled 
-        ? 'bg-white/95 backdrop-blur-sm shadow-lg' 
-        : 'bg-transparent'
-    }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 md:h-20">
-          {/* Logo/Brand */}
-          <div className="flex items-center">
+    <>
+      {/* TOP HEADER NAVBAR */}
+      <header
+        className="fixed top-0 left-0 right-0 z-40 transition-all duration-400"
+        style={{
+          background: scrolled ? 'rgba(255,255,255,0.97)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(12px)' : 'none',
+          boxShadow: scrolled ? '0 1px 0 #e5e7eb' : 'none',
+        }}
+      >
+        <div className="section-container relative">
+          <div className="flex justify-between items-center h-16 md:h-20">
             <button
-              onClick={scrollToTop}
-              className={`text-xl md:text-2xl font-bold transition-colors duration-300 ${
-                scrolled ? 'text-gray-900' : 'text-white'
-              } hover:text-blue-500`}
+              id="header-logo-btn"
+              onClick={() => scrollToSection('hero')}
+              className="font-bold text-base tracking-widest transition-all hover:opacity-70 border-none bg-transparent cursor-pointer"
+              style={{
+                color: scrolled ? '#ea580c' : 'white',
+                fontFamily: 'monospace',
+              }}
             >
-              MATHEUS BARBOZA
+              MB
+            </button>
+
+            {/* Middle Quote - Only visible on Web/Desktop when scrolled */}
+            <div
+              className={`hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center justify-center transition-all duration-500 pointer-events-none whitespace-nowrap ${
+                scrolled ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+              }`}
+            >
+              <span 
+                className="text-sm font-medium italic tracking-wide"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                "Nada grandioso se faz sozinho"
+              </span>
+            </div>
+
+            {/* Right Action Icons */}
+            <div className="hidden md:flex items-center gap-3">
+              <a
+                id="header-linkedin"
+                href="https://linkedin.com/in/matheusjesse"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg transition-all hover:opacity-70"
+                style={{ color: scrolled ? '#6b7280' : 'rgba(255,255,255,0.85)' }}
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin size={18} />
+              </a>
+              <a
+                id="header-github"
+                href="https://github.com/matheusjesse"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg transition-all hover:opacity-70"
+                style={{ color: scrolled ? '#6b7280' : 'rgba(255,255,255,0.85)' }}
+                aria-label="GitHub"
+              >
+                <FaGithub size={18} />
+              </a>
+            </div>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              id="header-mobile-menu"
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden p-2 rounded-lg border-none bg-transparent"
+              style={{ color: scrolled ? '#374151' : 'white' }}
+              aria-label="Menu"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {isOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
             </button>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <button
-              onClick={scrollToTop}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
-                scrolled 
-                  ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50' 
-                  : 'text-white hover:text-blue-300 hover:bg-white/10'
-              }`}
-            >
-              <FaHome className="text-sm" />
-              <span>Início</span>
-            </button>
-            
-            <button
-              onClick={() => scrollToSection('sobre-mim')}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
-                scrolled 
-                  ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50' 
-                  : 'text-white hover:text-blue-300 hover:bg-white/10'
-              }`}
-            >
-              <FaUser className="text-sm" />
-              <span>Sobre</span>
-            </button>
-
-            <button
-              onClick={() => scrollToSection('projetos')}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
-                scrolled 
-                  ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50' 
-                  : 'text-white hover:text-blue-300 hover:bg-white/10'
-              }`}
-            >
-              <FaBriefcase className="text-sm" />
-              <span>Projetos</span>
-            </button>
-
-            <button
-              onClick={() => scrollToSection('contact')}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
-                scrolled 
-                  ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50' 
-                  : 'text-white hover:text-blue-300 hover:bg-white/10'
-              }`}
-            >
-              <FaEnvelope className="text-sm" />
-              <span>Contato</span>
-            </button>
-
-            {/* Social Links Dropdown */}
-            <div className="relative group">
-              <button className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
-                scrolled 
-                  ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50' 
-                  : 'text-white hover:text-blue-300 hover:bg-white/10'
-              }`}>
-                <span>Redes</span>
-                <FaChevronDown className="text-sm group-hover:rotate-180 transition-transform duration-300" />
-              </button>
-              
-              <div className="absolute top-full right-0 mt-2 w-48 bg-white/95 backdrop-blur-sm rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                <div className="p-2 space-y-1">
-                  <a
-                    href="https://linkedin.com/in/matheus-barboza-dev"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-200"
+          {isOpen && (
+            <div className="md:hidden pb-4">
+              <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-3 space-y-1">
+                {NAV_ITEMS.map(({ id, label }) => (
+                  <button
+                    key={id}
+                    id={`mobile-nav-${id}`}
+                    onClick={() => scrollToSection(id)}
+                    className="flex w-full px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-all border-none bg-transparent text-left"
                   >
-                    <FaLinkedin className="w-4 h-4 mr-3" />
-                    LinkedIn
-                  </a>
-                  <a
-                    href="https://github.com/matheus-dev-fullstack"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-200"
-                  >
-                    <FaGithub className="w-4 h-4 mr-3" />
-                    GitHub
-                  </a>
-                </div>
+                    {label}
+                  </button>
+                ))}
               </div>
             </div>
-          </nav>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className={`md:hidden p-2 rounded-lg transition-colors duration-300 ${
-              scrolled ? 'text-gray-900' : 'text-white'
-            }`}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+          )}
         </div>
+      </header>
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden mt-2 pb-4">
-            <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-xl p-4 space-y-2">
-              <button
-                onClick={scrollToTop}
-                className="flex items-center space-x-3 w-full px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-300"
+      {/* FLOATING RIGHT DOCK (AUTHENTIC APPLE iOS 18 LIQUID GLASSMORPHISM) */}
+      <div
+        className="hidden md:flex fixed right-6 top-1/2 -translate-y-1/2 z-50 flex-col items-center gap-3 p-3 rounded-full transition-all duration-300"
+        style={{
+          background: 'rgba(15, 23, 42, 0.65)',
+          backdropFilter: 'blur(24px) saturate(200%)',
+          WebkitBackdropFilter: 'blur(24px) saturate(200%)',
+          border: '1px solid rgba(255, 255, 255, 0.22)',
+          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.35), inset 0 -1px 1px rgba(0, 0, 0, 0.4)',
+        }}
+      >
+        {NAV_ITEMS.map(({ id, label, icon: Icon }) => {
+          const isActive = activeSection === id;
+          return (
+            <div key={id} className="relative flex items-center group">
+              {/* Tooltip Label on Hover with iOS Glass Styling */}
+              <div
+                className="absolute right-14 opacity-0 translate-x-3 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 whitespace-nowrap px-3.5 py-1.5 rounded-xl text-xs font-semibold text-white shadow-xl"
+                style={{
+                  background: 'rgba(15, 23, 42, 0.75)',
+                  backdropFilter: 'blur(20px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+                  transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+                }}
               >
-                <FaHome />
-                <span>Início</span>
-              </button>
-              
-              <button
-                onClick={() => scrollToSection('sobre-mim')}
-                className="flex items-center space-x-3 w-full px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-300"
-              >
-                <FaUser />
-                <span>Sobre</span>
-              </button>
-
-              <button
-                onClick={() => scrollToSection('projetos')}
-                className="flex items-center space-x-3 w-full px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-300"
-              >
-                <FaBriefcase />
-                <span>Projetos</span>
-              </button>
-
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="flex items-center space-x-3 w-full px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-300"
-              >
-                <FaEnvelope />
-                <span>Contato</span>
-              </button>
-
-              <div className="flex items-center justify-center pt-4 border-t border-gray-200">
-                <div className="flex space-x-4">
-                  <a 
-                    href="https://github.com/matheusjesse" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300"
-                  >
-                    <FaGithub className="text-xl" />
-                  </a>
-                  <a 
-                    href="https://www.linkedin.com/in/matheusjesse/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300"
-                  >
-                    <FaLinkedin className="text-xl" />
-                  </a>
-                </div>
+                {label}
               </div>
+
+              {/* Nav Button with Specular Glass Highlight */}
+              <button
+                id={`floating-nav-${id}`}
+                onClick={() => scrollToSection(id)}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 relative border-none cursor-pointer group-hover:scale-115"
+                style={{
+                  background: isActive ? '#ea580c' : 'rgba(255, 255, 255, 0.1)',
+                  color: isActive ? '#ffffff' : 'rgba(255, 255, 255, 0.85)',
+                  border: isActive ? '1px solid rgba(255, 255, 255, 0.3)' : '1px solid rgba(255, 255, 255, 0.12)',
+                  transform: isActive ? 'scale(1.12)' : 'scale(1)',
+                  boxShadow: 'none',
+                  transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+                }}
+              >
+                <Icon size={16} />
+              </button>
             </div>
-          </div>
-        )}
+          );
+        })}
       </div>
-    </header>
+    </>
   );
 }
