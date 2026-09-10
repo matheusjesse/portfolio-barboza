@@ -5,6 +5,7 @@ import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import { BsHandIndexThumb } from 'react-icons/bs';
 import Image from 'next/image';
 import HeroImage from '../utils/images/representations-user-experience-interface-design.png';
+import TechBg from '../utils/images/3d-render-abstract-technology-background-network-communications.jpg';
 import { stacks } from '../utils/stacks';
 
 export default function Banner() {
@@ -32,9 +33,20 @@ export default function Banner() {
         background: 'linear-gradient(135deg, #fbbf24 0%, #f97316 45%, #ea580c 80%, #9a3412 100%)'
       }}
     >
+      {/* Base Technology Image Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src={TechBg}
+          alt="Technology Background"
+          fill
+          priority
+          className="object-cover opacity-30 mix-blend-overlay"
+        />
+      </div>
+
       {/* Base Vibrant Solar Yellow/Orange Layer */}
       <div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 pointer-events-none"
         style={{
           background: 'radial-gradient(ellipse at 50% 25%, rgba(254, 240, 138, 0.4) 0%, rgba(249, 115, 22, 0.2) 60%, transparent 100%)'
         }}
@@ -77,12 +89,10 @@ export default function Banner() {
       >
         {/* Flow Line 1 - Top Area Wave Pathway */}
         <path 
-          className="animate-flow-dash"
           d="M-100,120 C300,280 650,60 1050,240 C1350,380 1500,180 1600,120" 
           fill="none" 
           stroke="rgba(255, 255, 255, 0.35)" 
           strokeWidth="2" 
-          strokeDasharray="10 8"
         />
         {/* Flow Line 2 - Middle Area Wave Accent */}
         <path 
